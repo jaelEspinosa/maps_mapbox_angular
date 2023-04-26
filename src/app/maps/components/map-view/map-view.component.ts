@@ -16,6 +16,9 @@ export class MapViewComponent implements AfterViewInit {
   constructor(private placesService:PlacesService,
               private mapService: MapService){}
 
+  get styleMap() {
+    return this.mapService.styleMap
+  }
 
   ngAfterViewInit() {
 
@@ -23,9 +26,9 @@ export class MapViewComponent implements AfterViewInit {
 
     const map = new Map({
       container: this.mapDivElement.nativeElement, // container ID
-      style: 'mapbox://styles/mapbox/streets-v12', // style URL
+      style: this.styleMap, // style URL
       center: this.placesService.userLocation, // starting position [lng, lat]
-      zoom: 15, // starting zoom
+      zoom: 13, // starting zoom
       });
 
     const popup = new Popup()

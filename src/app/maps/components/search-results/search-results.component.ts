@@ -25,6 +25,9 @@ export class SearchResultsComponent {
   get places(): Feature[]{
     return this.placesSevice.places
   }
+  get previusPlaces(): Feature[]{
+    return this.placesSevice.previusPlaces
+  }
 
   flyTo (place: Feature ){
     this.selectedId = place.id
@@ -32,4 +35,16 @@ export class SearchResultsComponent {
     this.mapService.flyTo([lng, lat])
   }
 
+  getRuta(end:[number, number]){
+
+    if(!this.placesSevice.userLocation) throw new Error('Fallo en geolocalización')
+
+    this.mapService.getRouteBetweenPoints(this.placesSevice.userLocation, end )
+
+    this.placesSevice.clearPlaces()
+  }
+
+  previus(){
+     this.placesSevice.showPreviusPlaces()
+  }
 }

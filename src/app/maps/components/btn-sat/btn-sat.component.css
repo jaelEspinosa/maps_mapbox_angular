@@ -5,9 +5,12 @@ button{
   gap:3px;
   justify-content: space-around;
   position: fixed;
-  top:20px;
+  top:60px;
   right: 20px;
   z-index: 999;
+}
+img {
+  width: 16px;
 }
 
 @media(max-width:578px){

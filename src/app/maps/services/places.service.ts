@@ -1,7 +1,9 @@
 
 import { Injectable } from '@angular/core';
-import { Feature, PlacesResponse } from '../interfaces/places';
+
 import { PlacesApiClient } from '../api';
+import { MapService } from './map.service';
+import { Feature, PlacesResponse } from '../interfaces/places';
 
 
 @Injectable({
@@ -12,12 +14,14 @@ export class PlacesService {
   public userLocation?: [ number, number]
   public isLoadingPlaces: boolean = false;
   public places: Feature[]=[]
+  public previusPlaces: Feature[]=[]
 
   get isUserLoationReady():boolean{
     return !!this.userLocation
   }
 
-  constructor( private placesapi: PlacesApiClient) {
+  constructor( private placesapi: PlacesApiClient,
+               private mapService: MapService) {
     this.getUserLocation();
    }
 
@@ -58,10 +62,21 @@ export class PlacesService {
    .subscribe(resp => {
       this.places = resp.features
       this.isLoadingPlaces=false
+      this.mapService.createMarkersFromPlaces( this.places, this.userLocation! )
 
    });
 
   }
+//limpiar las places
 
+clearPlaces(){
+  this.previusPlaces= this.places;
+  this.places = [];
+ }
+
+showPreviusPlaces(){
+  this.places = this.previusPlaces;
+  this.previusPlaces = []
+}
 
 }

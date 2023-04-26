@@ -6,6 +6,9 @@
   <h6>Cargando</h6>
   <span>Espere por favor...</span>
 </div>
+<div *ngIf="previusPlaces.length"
+        >
+        <button class="btn btn-sm btn-outline-primary" (click)="previus()">volver</button> </div>
   <ng-template #placesReady>
     <ul class="list-group mt-2">
       <li
@@ -19,8 +22,10 @@
         <p>
           {{place.place_name}}
         </p>
-        <button [class]="place.id === selectedId ? 'btn btn-sm btn-outline-light': 'btn btn-sm btn-outline-primary'"
-        >Direcciones</button>
+        <button
+              [class]="place.id === selectedId ? 'btn btn-sm btn-outline-light': 'btn btn-sm btn-outline-primary'"
+              (click)="getRuta([place.center[0],place.center[1]])"
+              >Cómo llegar</button>
       </li>
     </ul>
   </ng-template>
