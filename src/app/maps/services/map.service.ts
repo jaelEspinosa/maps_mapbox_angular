@@ -57,7 +57,7 @@ export class MapService {
            <span>${place.place_name}}</span>
         `)
       const newMarker = new Marker()
-      .setLngLat({lng, lat})
+      .setLngLat([lng, lat])
       .setPopup( popup )
       .addTo(this.map);
 
@@ -74,14 +74,17 @@ export class MapService {
   })
   bounds.extend( userLocation )
   this.map.fitBounds( bounds,{
-    padding: 200
+    padding: 20
   } )
  }
 
  getRouteBetweenPoints( start: [number, number], end: [number, number] ){
-  this.directiosApiClient.get<Directions>(`/${start[0]},${start[1]};${end[0]},${end[1]}`)
-  .subscribe(res => this.drawPolyline(res.routes[0])
-  )
+  this.directiosApiClient.get<Directions>(`/${start.join(',')};${end.join(',')}`)
+  .subscribe(res => {
+    console.log(res.routes[0]);
+
+    this.drawPolyline(res.routes[0])
+  })
  }
 
 
@@ -98,7 +101,7 @@ private drawPolyline( route: Route) {
   coords.forEach( ([lng, lat]) => bounds.extend(([lng, lat]) ))
 
    this.map!.fitBounds(bounds ,{
-    padding: 200
+    padding: 20
    })
 
 // polyline
