@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { AnySourceData, LngLatBounds, LngLatLike, Map, Marker, Popup } from 'mapbox-gl';
+import { AnySourceData, Control, LngLatBounds, LngLatLike, Map, Marker, Popup } from 'mapbox-gl';
 import { Feature } from '../interfaces/places';
 import { DirectionsApiClient } from '../api';
 import { Directions, Route } from '../interfaces/directions';
+import { environment } from 'src/environment/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -106,6 +107,8 @@ private drawPolyline( route: Route) {
 
 // polyline
 
+
+
  const sourceData: AnySourceData = {
   type: 'geojson',
   data:{
@@ -143,6 +146,14 @@ private drawPolyline( route: Route) {
        'line-width' : 8
      }
  })
+
+
+
+ }
+
+
+ navigation(center: [number, number]) {
+  this.map!.setCenter(center)
  }
 }
 

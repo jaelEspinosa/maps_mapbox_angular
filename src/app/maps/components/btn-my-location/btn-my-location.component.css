@@ -12,6 +12,8 @@ button{
 
 @media(max-width:578px){
   button{
+    width: 100px;
+    font-size: 10px;
     right: 8px;
   }
 }

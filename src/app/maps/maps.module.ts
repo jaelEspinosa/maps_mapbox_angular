@@ -22,6 +22,7 @@ import { BtnSatComponent } from './components/btn-sat/btn-sat.component';
     SearchResultsComponent,
     BtnSatComponent
   ],
+
   imports: [
     CommonModule
   ],

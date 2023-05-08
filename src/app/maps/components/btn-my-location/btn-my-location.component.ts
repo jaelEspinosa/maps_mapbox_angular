@@ -24,5 +24,6 @@ export class BtnMyLocationComponent {
 
    this.mapService.flyTo(this.placesService.userLocation!)
 
+
   }
 }
